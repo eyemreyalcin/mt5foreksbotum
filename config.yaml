@@ -1,0 +1,95 @@
+# MT5 Strategy Scanner Bot - Configuration File
+# Türkçe Strateji Tarama Botu Ayarları
+
+# ============================================
+# BACKTESTING AYARLARI
+# ============================================
+backtest:
+  initial_balance: 10000          # Başlangıç Bakiyesi ($)
+  max_risk_per_trade: 0.02        # Per-Trade Max Risk (%2)
+  
+# ============================================
+# FİLTRELEME KRİTERLERİ
+# ============================================
+filters:
+  min_profit_factor: 1.5          # Minimum Profit Factor
+  min_win_rate: 0.60              # Minimum Win Rate (%60)
+  max_drawdown: 0.15              # Maximum Drawdown (%15)
+  min_sharpe_ratio: 0.8           # Minimum Sharpe Ratio
+  min_trades: 30                  # Minimum Trade Count
+
+# ============================================
+# İNDİKATÖR AYARLARI
+# ============================================
+indicators:
+  combination_types: [2, 3, 4]    # 2'li, 3'lü, 4'lü kombinasyonlar
+  correlation_limit: 0.70         # Korele indikatorları ayırma
+  
+  # Kullanılacak İndikatör Kategorileri
+  categories:
+    trend: true                    # SMA, EMA, DEMA, ADX, AROON
+    momentum: true                 # RSI, MACD, Stoch, ROC, CCI
+    volatility: true               # Bollinger Bands, ATR, KAMA
+    volume: true                   # OBV, AD, MFI
+    overlap: true                  # WMA, HMA, VWAP
+    cycle: true                    # Sine, Cosine
+    performance: true              # Log Returns, Cumulative Returns
+
+# ============================================
+# WALK FORWARD TEST AYARLARI
+# ============================================
+walk_forward:
+  enabled: true                   # Walk Forward Test Aç
+  train_window_days: 365          # Eğitim Penceresi (1 yıl)
+  test_window_days: 90            # Test Penceresi (3 ay)
+  step_days: 30                   # Pencere Kaydırma (1 ay)
+
+# ============================================
+# STRESS TEST AYARLARI
+# ============================================
+stress_test:
+  enabled: true                   # Stress Test Aç
+  monte_carlo_runs: 1000          # Monte Carlo Simülasyon Sayısı
+  confidence_level: 0.95          # Confidence Level (%95)
+  
+  # Stress Senaryoları
+  scenarios:
+    shuffle_trades: true           # Trade'leri shuffle et
+    worst_case_dd: true            # Worst Case Drawdown hesapla
+    ruin_probability: true         # Ruin Probability hesapla
+
+# ============================================
+# ZAMAN DİLİMLERİ
+# ============================================
+timeframes:
+  enabled: [1, 4]                 # H1 (1 saat), H4 (4 saat)
+  # Diğer seçenekler: 5, 15, 30, 60, 240, 1440 (1D)
+
+# ============================================
+# RAPORLAMA AYARLARI
+# ============================================
+reporting:
+  export_formats: ['csv', 'json'] # Export formatları
+  plot_equity_curve: true         # Equity Curve grafiği
+  plot_drawdown: true             # Drawdown grafiği
+  plot_monthly_returns: true      # Aylık getiri heatmap
+  decimal_places: 4               # Ondalık basamak sayısı
+
+# ============================================
+# GUI AYARLARI
+# ============================================
+gui:
+  theme: 'light'                  # light / dark
+  window_width: 1400              # Pencere genişliği
+  window_height: 900              # Pencere yüksekliği
+  results_per_page: 50            # Sonuç tablosunda satır sayısı
+  refresh_rate_ms: 500            # Progress bar güncellenme süresi (ms)
+
+# ============================================
+# LOG AYARLARI
+# ============================================
+logging:
+  level: 'INFO'                   # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: 'logs/bot.log'            # Log dosya yolu
+  console_output: true            # Konsola yazı yaz
+  max_file_size_mb: 10            # Max log dosya boyutu
